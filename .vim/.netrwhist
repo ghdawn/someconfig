@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/gaohan02/workspace/perception/traffic-lights-green'
+let g:netrw_dirhist_2='/home/gaohan02/workspace/baidu/adu/perception-trafficlights/build'
+let g:netrw_dirhist_3='/home/gaohan02/workspace/baidu/adu/catkin_trafficlights/src/perception-trafficlights'
+let g:netrw_dirhist_4='/home/gaohan02/baidu/adu/perception/traffic_light/interface'
