@@ -39,6 +39,14 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+
+call pathogen#infect()
+Helptags
+
+nnoremap <silent> <F4> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+nnoremap <F5> :buffers<CR>:buffer<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -67,6 +75,7 @@ nmap <leader>w :w!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
+set colorcolumn=81
 
 " Turn on the WiLd menu
 set wildmenu

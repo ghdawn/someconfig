@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/gaohan02/workspace/perception/traffic-lights-green'
-let g:netrw_dirhist_2='/home/gaohan02/workspace/baidu/adu/perception-trafficlights/build'
-let g:netrw_dirhist_3='/home/gaohan02/workspace/baidu/adu/catkin_trafficlights/src/perception-trafficlights'
-let g:netrw_dirhist_4='/home/gaohan02/baidu/adu/perception/traffic_light/interface'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/gaohan02/baidu/adu/perception/output/local/obstacle/conf'
+let g:netrw_dirhist_2='/home/gaohan02/baidu/adu/perception-lab/output/local/obstacle/conf'
+let g:netrw_dirhist_3='/home/gaohan02/baidu/adu/caffe/src/caffe/proto'
+let g:netrw_dirhist_4='/home/gaohan02/baidu/adu/perception-lab/build/obstacle/camera/test/scripts'
+let g:netrw_dirhist_5='/home/gaohan02/baidu/adu/perception-trafficlights/build/traffic_light/test/data/models/recognizer'
