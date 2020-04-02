@@ -39,14 +39,113 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+"runtime bundle/vim-pathogen/autoload/pathogen.vim
+"call pathogen#infect()
+"Helptags
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin('~/.vim/bundle')
+Plug 'scrooloose/nerdtree'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/LeaderF'
+Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'skywind3000/vim-auto-popmenu'
+call plug#end()
 
-call pathogen#infect()
-Helptags
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => config for plugins 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""
+" for auto popmenu 
+"""""""""""""
+" enable this plugin for filetypes, '*' for all files.
+let g:apc_enable_ft = {'*':1, 'markdown':1, 'php':1}
+
+" source for dictionary, current or other loaded buffers, see ':help cpt'
+set cpt=.,k,w,b
+
+" don't select the first item.
+set completeopt=menu,menuone,noselect
+
+" suppress annoy messages.
+set shortmess+=c
+"""""""""""
+" for leaderf 
+"""""""""""""
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+noremap <c-q> :LeaderfMru<cr>
+noremap <c-n> :LeaderfFunction!<cr>
+noremap <m-n> :LeaderfBuffer<cr>
+noremap <m-m> :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+let g:airline_theme='dark'
+"""""""""""
+" for ale
+"""""""""""""
+let g:ale_linters = {'c': ['gcc'],'cc': ['gcc'], 'cpp': ['gcc'], 'python': ['flake8','pylint']}
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -std=c++11'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+
+"""""""""""
+" for gen tags
+"""""""""""""
+set tags=./.tags;,.tags
+
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+   endif
+noremap <c-z> <NOP>
+
 
 nnoremap <silent> <F4> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
 nnoremap <F5> :buffers<CR>:buffer<Space>
+set updatetime=300
+set colorcolumn=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -63,8 +162,8 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = ";"
+let g:mapleader = ";"
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -75,7 +174,7 @@ nmap <leader>w :w!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-set colorcolumn=81
+set noshowmode
 
 " Turn on the WiLd menu
 set wildmenu
@@ -143,6 +242,7 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
+hi Comment ctermfg=LightBlue
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
